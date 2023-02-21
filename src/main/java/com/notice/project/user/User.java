@@ -16,9 +16,8 @@ public class User {
 	private int user_code;
 	private String user_name;
 	private String user_email;
-	private String user_userId;
 	private String user_password;
-	private String user_roles;
+	private Enum<Role> user_roles;
 	private String user_provider;
 	private String user_address;
 	private int user_gender;

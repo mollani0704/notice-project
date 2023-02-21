@@ -3,5 +3,38 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.notice.project.user.UserRepository">
-  
+  	<insert id="save" parameterType="com.notice.project.user.User">
+  		insert into
+  			user_mst
+  		values(
+  			0, 
+  			#{user_name},
+  			#{user_email},
+  			#{user_password},
+  			#{user_roles},
+  			#{user_provider},
+  			#{user_address},
+  			#{user_gender},
+  			now(),
+  			now()
+  		)
+  	</insert>
+  	
+  	<select id="findUserByUsername" parameterType="String" resultType="com.notice.project.user.User">
+  		
+  		select
+  			user_code,
+  			user_name,
+  			user_email,
+  			user_id,
+  			user_password,
+  			user_roles,
+  			user_provider
+  		from
+  			user_mst
+  		where
+  			user_name = #{user_name}
+  	
+  	</select>
+  	
   </mapper>
