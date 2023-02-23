@@ -32,7 +32,7 @@ public class PrincipalDetail implements UserDetails{
 		Collection<GrantedAuthority> collector = new ArrayList<GrantedAuthority>();
 		
 		collector.add(() -> {
-			return "ROLL_" + user.getUser_roles();
+			return "ROLE_" + user.getUser_roles();
 		});
 		
 		return collector;

@@ -9,6 +9,7 @@
   		values(
   			0, 
   			#{user_name},
+  			#{user_id},
   			#{user_email},
   			#{user_password},
   			#{user_roles},
@@ -26,7 +27,6 @@
   			user_code,
   			user_name,
   			user_email,
-  			user_id,
   			user_password,
   			user_roles,
   			user_provider

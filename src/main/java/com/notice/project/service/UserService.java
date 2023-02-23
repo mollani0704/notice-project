@@ -1,7 +1,7 @@
 package com.notice.project.service;
 
-import com.notice.project.dto.UserReqDto;
+import com.notice.project.dto.SignUpReqDto;
 
 public interface UserService {
-	public Boolean save(UserReqDto userReqDto) throws Exception;
+	public Boolean save(SignUpReqDto signUpReqDto) throws Exception;
 }
