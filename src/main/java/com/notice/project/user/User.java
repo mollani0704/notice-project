@@ -2,6 +2,8 @@ package com.notice.project.user;
 
 import java.sql.Timestamp;
 
+import com.notice.project.dto.UsernameValidRespDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,4 +26,13 @@ public class User {
 	private int user_gender;
 	private Timestamp create_date;
 	private Timestamp update_date;
+	
+	public UsernameValidRespDto toValidDto() {
+		return UsernameValidRespDto.builder()
+					.user_code(user_code)
+					.user_name(user_name)
+					.user_id(user_id)
+					.user_roles(user_roles)
+					.build();
+	}
 }

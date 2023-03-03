@@ -4,4 +4,6 @@ import com.notice.project.dto.SignUpReqDto;
 
 public interface UserService {
 	public Boolean save(SignUpReqDto signUpReqDto) throws Exception;
+	
+	public Boolean validUsername(String username) throws Exception;
 }

@@ -26,6 +26,7 @@
   		select
   			user_code,
   			user_name,
+  			user_id,
   			user_email,
   			user_password,
   			user_roles,
@@ -33,7 +34,7 @@
   		from
   			user_mst
   		where
-  			user_name = #{user_name}
+  			user_id = #{user_name}
   	
   	</select>
   	
