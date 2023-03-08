@@ -1,8 +1,12 @@
 package com.notice.project.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.notice.project.dto.CMRespDto;
 import com.notice.project.dto.SignUpReqDto;
+import com.notice.project.handler.CustomValidationApiException;
+import com.notice.project.handler.aop.annotation.Log;
+import com.notice.project.handler.aop.annotation.Timer;
+import com.notice.project.handler.aop.annotation.ValidCheck;
 import com.notice.project.service.UserService;
 import com.notice.project.user.User;
 
@@ -21,8 +29,21 @@ public class UserApiController {
 	
 	private final UserService userService;
 	
+	@Log
+	@Timer
+	@ValidCheck
 	@PostMapping("/api/auth/signup")
-	public ResponseEntity<?> signup(@Valid @RequestBody SignUpReqDto signUpReqDto) {
+	public ResponseEntity<?> signup(@Valid @RequestBody SignUpReqDto signUpReqDto, BindingResult bindingResult ) {
+		
+		if(bindingResult.hasErrors()) {
+			Map<String, String> errorMessage = new HashMap<String, String>();
+			
+			bindingResult.getFieldErrors().forEach(error -> {
+				errorMessage.put(error.getField(), error.getDefaultMessage());
+			});
+			
+			throw new CustomValidationApiException("유효성 검사", errorMessage);
+		}
 		
 		boolean result = false;
 		

@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
 		
 		User user = userRepository.findUserByUsername(username);
 		
-		return user.getUser_id() == username;
+		return user == null;
 	}
 
 }
