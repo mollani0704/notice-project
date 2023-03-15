@@ -12,6 +12,7 @@
   			#{user_id},
   			#{user_email},
   			#{user_password},
+  			#{oauth2_id},
   			#{user_roles},
   			#{user_provider},
   			#{user_address},
@@ -36,6 +37,25 @@
   		where
   			user_id = #{user_name}
   	
+  	</select>
+  	
+  	<select id="findOAuth2UserByUsername" parameterType="String"
+  	resultType="com.notice.project.user.User">
+  		
+  		select
+  		    user_code,
+  		    user_name,
+  		    user_id,
+  		    user_email,
+  		    user_password,
+  		    oauth2_id,
+  		    user_roles,
+  		   user_provider
+  		from
+  		    user_mst
+  		where
+  		  oauth2_id = #{oauth2_id}
+  		  
   	</select>
   	
   </mapper>

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
+import com.notice.project.handler.CustomValidationApiException;
+
 @Aspect
 @Component
 public class ValidCheckAop {
@@ -26,20 +28,20 @@ public class ValidCheckAop {
 	@Before("enableValid()")
 	public void validCheck(JoinPoint joinPoint) {
 		Object[] args = joinPoint.getArgs();
+		Map<String, String> errorMap = new HashMap<String, String>();
 		LOGGER.info(">>>>>>>>>>> 유효성 검사 중.....");
 		
 		for(Object arg : args) {
 			if(arg.getClass() == BeanPropertyBindingResult.class) {
 				BindingResult bindingResult = (BindingResult) arg;
 				if(bindingResult.hasErrors()) {
-					Map<String, String> errorMap = new HashMap<String, String>();
-					
 					bindingResult.getFieldErrors().forEach(error -> {
 						errorMap.put(error.getField(), error.getDefaultMessage());
 					});
 				}
 			}
 		}
+		throw new CustomValidationApiException("유효성 검사", errorMap);
 	}
 	
 	@AfterReturning(value = "enableValid()", returning = "returnObj")

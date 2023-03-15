@@ -7,12 +7,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.notice.project.service.PrincipalOauth2UserService;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	private final PrincipalOauth2UserService principalOauth2UserService;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -32,6 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.formLogin()
 			.loginPage("/signin")
 			.loginProcessingUrl("/signin")
+			
+			.and()
+			
+			.oauth2Login()
+			.userInfoEndpoint()
+			.userService(principalOauth2UserService)
+			
+			.and()
+			
 			.defaultSuccessUrl("/");
 	
 	}

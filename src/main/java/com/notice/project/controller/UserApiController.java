@@ -35,15 +35,15 @@ public class UserApiController {
 	@PostMapping("/api/auth/signup")
 	public ResponseEntity<?> signup(@Valid @RequestBody SignUpReqDto signUpReqDto, BindingResult bindingResult ) {
 		
-		if(bindingResult.hasErrors()) {
-			Map<String, String> errorMessage = new HashMap<String, String>();
-			
-			bindingResult.getFieldErrors().forEach(error -> {
-				errorMessage.put(error.getField(), error.getDefaultMessage());
-			});
-			
-			throw new CustomValidationApiException("유효성 검사", errorMessage);
-		}
+//		if(bindingResult.hasErrors()) {
+//			Map<String, String> errorMessage = new HashMap<String, String>();
+//			
+//			bindingResult.getFieldErrors().forEach(error -> {
+//				errorMessage.put(error.getField(), error.getDefaultMessage());
+//			});
+//			
+//			throw new CustomValidationApiException("유효성 검사", errorMessage);
+//		}
 		
 		boolean result = false;
 		

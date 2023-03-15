@@ -11,6 +11,16 @@ server:
     uri-encoding: UTF-8
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 805757125729-sj1antm0mp886k064m8dmv7g51ta4hv8.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+            - email
+            - profile
   mvc:
     static-path-pattern: /static/**
   datasource:
