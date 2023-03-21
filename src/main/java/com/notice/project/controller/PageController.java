@@ -21,4 +21,23 @@ public class PageController {
 		return "signup";
 	}
 	
+	@GetMapping("/notice")
+	public String noticePage() {
+		return "notice/notice";
+	}
+	
+	@GetMapping("/notice/insert")
+	public String loadNoticeInsert() {
+		return "notice/notice_insert";
+	}
+	
+	@GetMapping("/notice/{noticeCode}")
+	public String loadNoticeDetail() {
+		return "notice/notice_detail";
+	}
+	
+	@GetMapping("/notice/modification/{noticeCode}")
+	public String loadNoticeModify() {
+		return "notice/notice_modify";
+	}
 }
