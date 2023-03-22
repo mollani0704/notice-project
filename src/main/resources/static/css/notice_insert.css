@@ -27,11 +27,6 @@
 	background-color: white;
 }
 
-#ir1 {
-	width: 100%;
-	height: 500px;
-}
-
 .notice__submit {
 	display: flex;
 	justify-content: center;

@@ -17,12 +17,12 @@
 <body>
 	<header>
         <nav>
-            <button type="button" class="nav-list">홈</button>
-            <button type="button" class="nav-list">공지사항</button>
+            <button type="button" class="nav__list">홈</button>
+            <button type="button" class="nav__list">공지사항</button>
         </nav>
-        <div class="auth-items">
-            <button type="button" class="auth-button signin">로그인</button>
-            <button type="button" class="auth-button signup">회원가입</button>
+        <div class="auth__items">
+            <button type="button" class="auth__button signin">로그인</button>
+            <button type="button" class="auth__button signup">회원가입</button>
         </div>
     </header>
     <main>
@@ -31,26 +31,26 @@
     	</div>
     	<article>
             <form enctype="multipart/form-data">
-                <table class="notice-list">
-                    <tr class="notice-row">
+                <table class="notice__list">
+                    <tr class="notice__row">
                         <th>제목</td>
-                        <td><input type="text" class="notice-title"></td>
+                        <td><input type="text" class="notice__title"></td>
                     </tr>
-                    <tr class="notice-row">
+                    <tr class="notice__row">
                         <td colspan="2">
-                            <input type="file" class="notice-file">
+                            <input type="file" class="notice__file">
                         </td>
                     </tr>
-                    <tr class="notice-row">
+                    <tr class="notice__row">
                         <td colspan="2">
-                            <textarea name="ir1" id="ir1" style="width: 100%; height: 500px;"></textarea>
+                            <textarea id="summernote" name="editordata" style="width: 100%; height: 500px;"></textarea>
                         </td>
                     </tr>
-                    <tr class="notice-row">
+                    <tr class="notice__row">
                         <td colspan="2">
-                            <div class="notice-submit">
-                                <button type="button" class="notice-button submit">작성하기</button>
-                                <button type="button" class="notice-button cancel">작성하기</button>
+                            <div class="notice__submit">
+                                <button type="button" class="notice__button submit">작성하기</button>
+                                <button type="button" class="notice__button cancel">취소하기</button>
                             </div>
                         </td>
                     </tr>
