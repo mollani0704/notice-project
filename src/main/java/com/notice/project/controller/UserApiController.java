@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.notice.project.handler.CustomValidationApiException;
 import com.notice.project.handler.aop.annotation.Log;
 import com.notice.project.handler.aop.annotation.Timer;
 import com.notice.project.handler.aop.annotation.ValidCheck;
+import com.notice.project.service.PrincipalDetail;
 import com.notice.project.service.UserService;
 import com.notice.project.user.User;
 
@@ -31,7 +33,7 @@ public class UserApiController {
 	
 	@Log
 	@Timer
-	@ValidCheck
+//	@ValidCheck
 	@PostMapping("/api/auth/signup")
 	public ResponseEntity<?> signup(@Valid @RequestBody SignUpReqDto signUpReqDto, BindingResult bindingResult ) {
 		
@@ -71,6 +73,15 @@ public class UserApiController {
 		}
 		
 		return ResponseEntity.ok().body(new CMRespDto<>(200, "validation check가 완료되었습니다.", result));
+	}
+	
+	@GetMapping("/api/auth/principal")
+	public ResponseEntity<?> getPrincipal(@AuthenticationPrincipal PrincipalDetail principalDetail) {
+		if(principalDetail == null) {
+			return ResponseEntity.badRequest().body(new CMRespDto<>(1, "principal is null", null));
+		}
+		
+		return ResponseEntity.ok(new CMRespDto<>(1, "success load", principalDetail.getUser()));
 	}
 	
 }
