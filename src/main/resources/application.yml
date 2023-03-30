@@ -28,7 +28,14 @@ spring:
     url: "jdbc:mariadb://web-study.cdunfdqk1xmg.ap-northeast-2.rds.amazonaws.com:3306/notice?useUnicode=true&characterEncoding=UTF-8"
     username: "admin"
     password: "1q2w3e4r"
-    
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+            
 mybatis:
   mapper-locations:
   - /mappers/*.xml
+  
+file:
+  path: C:/Users/molla/Desktop/Coding/JAVA/practice/upload/

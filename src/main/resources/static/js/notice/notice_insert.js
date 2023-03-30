@@ -10,6 +10,23 @@ submitButton.addEventListener('click', () => {
 	formData.forEach((value, key) => {
 		console.log("key : " + key);
 		console.log("value : " + value);
+	});
+	
+	$.ajax({
+		async : false,
+		type: "post",
+		url: "api/v1/notice",
+		enctype: "multipart/form-data",
+		contentType: false,
+		processData: false,
+		data: formData,
+		dataType: "json",
+		success: (response) => {
+			console.log(response);
+		},
+		error : (error) => {
+			console.log(error);
+		}
 	})
 	
 })
