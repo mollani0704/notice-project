@@ -30,4 +30,55 @@
   		)
   		</foreach>
   	</insert>
+  	
+  	<select id="getNoticeList" parameterType="hashmap" resultType="com.notice.project.domain.Notice">
+  		select
+  			nm.notice_code,
+  			nm.notice_title,
+  			um.user_id,
+  			nm.create_date,
+  			nm.notice_count,
+  			(select
+  				count(*)
+  			from 
+  				notice_mst nm
+  				left outer join user_mst um on(um.user_code = nm.user_code)
+  			<choose>
+  				<when test='search_flag == "title"'>
+  					where
+  						nm.notice_title like concat('%', #{search_value}, '%')
+  				</when>
+  				<when test='search_flag == "titleAndContent"'>
+  					where
+  						nm.notice_title like concat('%', #{search_value}, '%')
+  						or nm.notice_content like concat('%', #{search_value}, '%')
+  				</when>
+  				<when test='search_flag == "wrtier"'>
+  					where
+  						um.user_id like concat('%', #{search_value}, '%')
+  				</when>
+  			</choose>	
+  				) as total_notice_count
+  			from 
+  				notice_mst nm
+  				left outer join user_mst um on(um.user_code = nm.user_code)
+  			<choose>
+  				<when test='search_flag == "title"'>
+  					where
+  						nm.notice_title like concat('%', #{search_value}, '%')
+  				</when>
+  				<when test='search_flag == "titleAndContent"'>
+  					where
+  						nm.notice_title like concat('%', #{search_value}, '%')
+  						or nm.notice_content like concat('%', #{search_value}, '%')
+  				</when>
+  				<when test='search_flag == writer"'>
+  					where
+  						um.user_id like concat('%', #{search_value}, '%')
+  				</when>
+  			</choose>
+  			order by
+  				notice_code desc
+  			limit #{index}, 10;
+  	</select>
   </mapper>

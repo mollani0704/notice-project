@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel=stylesheet href="/static/css/notice.css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel=stylesheet href="/static/css/notice.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script defer src="/static/js/notice/notice.js"></script>
 </head>
 <body>
 	<th:block th:replace="/notice/header"></th:block>
@@ -22,6 +24,7 @@
 		</div>
 		<article>
 			<table class="notice__list">
+			<thead>
 				<tr class="notice__row--header">
 					<th>번호</th>
 					<th>제목</th>
@@ -29,6 +32,8 @@
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>
+			</thead>
+			<tbody>
 				<tr class="notice__row">
 					<td>1</td>
 					<td>spring boot 수업</td>
@@ -36,6 +41,7 @@
 					<td>2023-03-20</td>
 					<td>10</td>
 				</tr>
+			</tbody>
 			</table>
 		</article>
 		<div class="page__buttons">

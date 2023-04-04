@@ -5,7 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -17,6 +19,7 @@ import com.notice.project.domain.Notice;
 import com.notice.project.domain.NoticeFile;
 import com.notice.project.domain.NoticeRepository;
 import com.notice.project.dto.AddNoticeReqDto;
+import com.notice.project.dto.GetNoticeListResponseDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -80,6 +83,26 @@ public class NoticeServiceImpl implements NoticeService{
 		}
 		
 		return notice.getNotice_code();
+	}
+
+	@Override
+	public List<GetNoticeListResponseDto> getNoticeList(int page, String searchFlag, String searchValue)
+			throws Exception {
+		
+		int index = (page - 1) * 10;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("index", index);
+		map.put("search_flag", searchFlag);
+		map.put("search_value", searchValue == null ? "" : searchValue);
+		
+		List<GetNoticeListResponseDto> list = new ArrayList<GetNoticeListResponseDto>();
+		
+		noticeRepository.getNoticeList(map).forEach(notice -> {
+			list.add(notice.toListDto());
+		});
+		
+		return list;
 	}
 
 }
