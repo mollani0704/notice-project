@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.notice.project.domain.NoticeFile;
 import com.notice.project.domain.NoticeRepository;
 import com.notice.project.dto.AddNoticeReqDto;
 import com.notice.project.dto.GetNoticeListResponseDto;
+import com.notice.project.dto.GetNoticeResponseDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -103,6 +105,52 @@ public class NoticeServiceImpl implements NoticeService{
 		});
 		
 		return list;
+	}
+
+	@Override
+	public GetNoticeResponseDto getNotice(String flag, int noticeCode) throws Exception {
+		
+		GetNoticeResponseDto getNoticeResponseDto = null;
+		
+		Map<String, Object> reqMap = new HashMap<String, Object>();
+		reqMap.put("flag", flag);
+		reqMap.put("notice_code", noticeCode);
+		
+		noticeRepository.countIncrement(reqMap);
+		
+		List<Notice> notices = noticeRepository.getNotice(reqMap);
+		
+		if(!notices.isEmpty()) {
+			List<Map<String, Object>> downloadFiles = new ArrayList<Map<String,Object>>();
+			notices.forEach(notice -> {
+				Map<String, Object> fileMap = new HashMap<String, Object>();
+				
+				String fileName = notice.getFile_name();
+				if(fileName != null) {
+					fileMap.put("fileCode", notice.getFile_code());
+					fileMap.put("fileOriginName", fileName.substring(fileName.indexOf("_") + 1));
+					fileMap.put("fileTempName", fileName);
+				}
+				
+				downloadFiles.add(fileMap);
+			});
+			
+			Notice firstNotice = notices.get(0);
+			
+			getNoticeResponseDto = GetNoticeResponseDto.builder()
+										.noticeCode(notices.get(0).getNotice_code())
+										.noticeTitle(firstNotice.getNotice_title())
+										.userCode(firstNotice.getUser_code())
+										.userId(firstNotice.getUser_id())
+										.createDate(firstNotice.getCreate_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+										.noticeCount(firstNotice.getNotice_count())
+										.noticeContent(firstNotice.getNotice_content())
+										.downloadFiles(downloadFiles)
+										.build();
+			
+		}
+		
+		return getNoticeResponseDto;
 	}
 
 }

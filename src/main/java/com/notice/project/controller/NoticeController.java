@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.notice.project.dto.AddNoticeReqDto;
 import com.notice.project.dto.CMRespDto;
 import com.notice.project.dto.GetNoticeListResponseDto;
+import com.notice.project.dto.GetNoticeResponseDto;
 import com.notice.project.service.notice.NoticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -56,6 +57,24 @@ public class NoticeController {
 		}
 		
 		return ResponseEntity.ok().body(new CMRespDto<>(1, "lookup successful", listDto));
+	}
+	
+	@GetMapping("/notice/api/v1/notice/{noticeCode}")
+	public ResponseEntity<?> getNotice(@PathVariable int noticeCode) {
+		
+		GetNoticeResponseDto getNoticeResponseDto = null;
+		
+		try {
+			getNoticeResponseDto = noticeService.getNotice(null, noticeCode);
+			if(getNoticeResponseDto == null) {
+				return ResponseEntity.badRequest().body(new CMRespDto<>(-1, "database error", null));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body(new CMRespDto<>(-1, "request failed", null));
+		}
+		
+		return ResponseEntity.ok().body(new CMRespDto<>(1, "lookup successful", getNoticeResponseDto));
 	}
 	
 }
