@@ -1,7 +1,17 @@
 package com.notice.project.controller;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +32,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class NoticeController {
+	
+	@Value("${file.path}")
+	private String filePath;
 	
 	private final NoticeService noticeService;
 	
@@ -75,6 +88,28 @@ public class NoticeController {
 		}
 		
 		return ResponseEntity.ok().body(new CMRespDto<>(1, "lookup successful", getNoticeResponseDto));
+	}
+	
+	@GetMapping("notice/api/v1/notice/file/download/{fileName}")
+	public ResponseEntity<?> downloadFile(@PathVariable String fileName) throws IOException {
+		
+		Path path = Paths.get(filePath + "notice/" + fileName);
+		String contentType = Files.probeContentType(path);
+		
+		log.info("contentType : {} ", contentType);
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		headers.setContentDisposition(ContentDisposition.builder("attachment")
+											.filename(fileName, StandardCharsets.UTF_8)
+											.build());
+		
+		headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+		
+		Resource resource = new InputStreamResource(Files.newInputStream(path));
+		
+		return ResponseEntity.ok().headers(headers).body(resource);
+		
 	}
 	
 }

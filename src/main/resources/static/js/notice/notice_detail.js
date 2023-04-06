@@ -42,7 +42,7 @@ function getNotice(notice) {
 	notice.downloadFiles.forEach(file => {
 		if(file.fileCode != undefined) {
 			noticeFileArray.push(`
-				<a href="/api/v1/notice/file/download/${file.fileTempName}">${file.fileOriginName}</a>`
+				<a href="/notice/api/v1/notice/file/download/${file.fileTempName}">${file.fileOriginName}</a>`
 			)
 		}
 	});
