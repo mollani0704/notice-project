@@ -153,4 +153,16 @@ public class NoticeServiceImpl implements NoticeService{
 		return getNoticeResponseDto;
 	}
 
+	@Override
+	public int modifyNotice(int noticeCode, GetNoticeResponseDto getNoticeResponseDto) throws Exception {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("noticeCode", noticeCode);
+		data.put("updateNotice", getNoticeResponseDto.toEntiy());
+		
+		noticeRepository.updateNotice(data);
+		
+		return 1;
+	}
+
 }

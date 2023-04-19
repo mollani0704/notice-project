@@ -96,7 +96,7 @@ function getPageNumbers(totalNoticeCount) {
 	if(startIndex != totalPageCount) {
 		const nextPageButton = document.querySelector('.next');
 		nextPageButton.addEventListener('click', () => {
-			nowPage = endIndex - 1;
+			nowPage = endIndex + 1;
 			load(nowPage);
 		})
 	}

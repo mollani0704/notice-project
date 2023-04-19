@@ -1,10 +1,19 @@
 package com.notice.project.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.notice.project.service.notice.NoticeService;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 public class PageController {
+	
+	private final NoticeService noticeService;
 	
 	@GetMapping({"/", "/index"})
 	public String loadIndex() {
@@ -36,8 +45,15 @@ public class PageController {
 		return "notice/notice_detail";
 	}
 	
-	@GetMapping("/notice/modification/{noticeCode}")
-	public String loadNoticeModify() {
+	@GetMapping("/notice/modify/{noticeCode}")
+	public String loadNoticeModify(@PathVariable int noticeCode, Model model) {
+		
+		try {
+			model.addAttribute("notice", noticeService.getNotice(null, noticeCode));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "notice/notice_modify";
 	}
 }

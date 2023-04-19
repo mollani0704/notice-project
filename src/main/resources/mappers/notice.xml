@@ -171,5 +171,15 @@
   		</choose>
   		
   	</update>
+  	<update id="updateNotice" parameterType="hashmap">
+  	
+  		update
+  			notice_mst
+  		set
+  			notice_title = #{updateNotice.notice_title},
+  			notice_content = #{updateNotice.notice_content}
+  		where
+  			notice_code = #{noticeCode}
+  	</update>
   	
   </mapper>

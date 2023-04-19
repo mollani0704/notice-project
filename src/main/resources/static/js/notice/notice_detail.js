@@ -1,5 +1,10 @@
 
 let noticeCode = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+const modifyBtn = document.querySelector('.modify');
+
+modifyBtn.addEventListener('click', () => {
+	location.href = `/notice/modify/${noticeCode}`;
+})
 
 load("api/v1/notice/");
 
@@ -11,6 +16,7 @@ function load(uri) {
 		dataType: "json",
 		success: (response) => {
 			getNotice(response.data);
+			console.log(response.data);
 		}, 
 		
 		error: (error) => {
@@ -29,9 +35,10 @@ function getNotice(notice) {
 	
 	noticeDetailTitle.innerHTML = notice.noticeTitle;
 	
-	noticeDetailDescriptions[0].innerHTML = "작성자: " + notice.userId;
-	noticeDetailDescriptions[1].innerHTML = "작성일: " + notice.createDate;
-	noticeDetailDescriptions[0].innerHTML = "조회수: " + notice.noticeCount;
+	noticeDetailDescriptions[0].innerHTML = "글번호: " + notice.noticeCode;
+	noticeDetailDescriptions[1].innerHTML = "작성자: " + notice.userId;
+	noticeDetailDescriptions[2].innerHTML = "작성일: " + notice.createDate;
+	noticeDetailDescriptions[3].innerHTML = "조회수: " + notice.noticeCount;
 	
 	noticeContent.innerHTML = notice.noticeContent;
 	

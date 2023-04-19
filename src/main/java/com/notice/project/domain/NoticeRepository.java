@@ -13,5 +13,7 @@ public interface NoticeRepository {
 	public List<Notice> getNoticeList(Map<String, Object> map) throws Exception;
 	public List<Notice> getNotice(Map<String, Object> map) throws Exception; 
 	
+	public int updateNotice(Map<String, Object> map) throws Exception;
+	
 	public int countIncrement(Map<String, Object> map) throws Exception;
 }
