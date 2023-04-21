@@ -11,6 +11,7 @@ public interface NoticeService {
 	public List<GetNoticeListResponseDto> getNoticeList(int page, String searchFlag, String searchValue) throws Exception;
 	public int addNotice(AddNoticeReqDto addNoticeReqDto) throws Exception;
 	public GetNoticeResponseDto getNotice(String flag, int noticeCode) throws Exception;
-	public int modifyNotice(int noticeCode, GetNoticeResponseDto getNoticeResponseDto) throws Exception;
 	
+	public int modifyNotice(int noticeCode, GetNoticeResponseDto getNoticeResponseDto) throws Exception;
+	public int deleteNotice(int noticeCode) throws Exception;
 }

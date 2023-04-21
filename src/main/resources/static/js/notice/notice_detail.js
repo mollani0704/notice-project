@@ -1,9 +1,24 @@
-
 let noticeCode = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
 const modifyBtn = document.querySelector('.modify');
+const deleteBtn = document.querySelector('.delete');
 
 modifyBtn.addEventListener('click', () => {
 	location.href = `/notice/modify/${noticeCode}`;
+})
+
+deleteBtn.addEventListener('click', () => {
+	$.ajax({
+		type: "delete",
+		url: "/notice/api/v1/notice/" + noticeCode,
+		dataType: "json"
+	})
+	.done((reponse) => {
+		alert("글 삭제가 완료 되었습니다.")
+		location.href = '/notice'
+	})
+	.fail((error) => {
+		console.log(error);
+	})
 })
 
 load("api/v1/notice/");

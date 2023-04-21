@@ -165,4 +165,12 @@ public class NoticeServiceImpl implements NoticeService{
 		return 1;
 	}
 
+	@Override
+	public int deleteNotice(int noticeCode) throws Exception {
+		
+		noticeRepository.deleteNotice(noticeCode);
+		
+		return 0;
+	}
+
 }

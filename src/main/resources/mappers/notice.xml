@@ -182,4 +182,14 @@
   			notice_code = #{noticeCode}
   	</update>
   	
+  	<delete id="deleteNotice" parameterType="Integer">
+  		
+  		DELETE
+  		FROM
+  			notice_mst
+  		where
+  			notice_code = #{noticeCode}
+  		
+  	</delete>
+  	
   </mapper>

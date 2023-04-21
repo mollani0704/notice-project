@@ -13,6 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -126,6 +127,19 @@ public class NoticeController {
 		}
 		
 		return ResponseEntity.ok().body(new CMRespDto<>(1, "request sucesss", 200));
+	}
+	
+	@DeleteMapping("notice/api/v1/notice/{noticeCode}")
+	public ResponseEntity<?> deleteNotice(@PathVariable int noticeCode) {
+		
+		try {
+			noticeService.deleteNotice(noticeCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body(new CMRespDto<>(-1, "request failed", null));
+		}
+		
+		return ResponseEntity.ok().body(new CMRespDto<>(1, "request success", 200));
 	}
 	
 }
