@@ -4,21 +4,21 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/static/css/signup.css">
         <script src="/static/js/signup.js" defer></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
         <title>Document</title>
     </head>
     <body>
-        <form method="post" class="signup__form">
-            <label>사용자 이름</label>
-            <input name="name" class="name"/><br />
-            <label>아이디</label>
-            <input name="username" class="username"/><br />
-            <label>비밀번호</label>
-            <input type="password" name="password" class="password"/><br />
-            <label>이메일</label>
-            <input type="email" name="email" class="email"/>
-        </form>
+    	<div class="container">
+    	<h1 class="title">회원가입</h1>
+        	<form method="post" class="signup__form">
+            	<input id="input" name="name" class="name" placeholder="사용자의 이름을 입력해주세요"/>
+            	<input id="input" name="username" class="username" placeholder="사용하실 아이디를 입력해주세요"/>
+            	<input id="input" type="password" name="password" class="password" placeholder="사용하실 비밀번호를 입력해주세요"/> 
+            	<input id="input" type="email" name="email" class="email" placeholder="사용하실 이메일을 입력해주세요"/>
+        	</form>
         <button class="signup__btn" type="submit">회원가입</button>
+    	</div>
     </body>
 </html>
