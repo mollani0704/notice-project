@@ -1,0 +1,103 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	
+	margin: 0;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	background-color: #FAFAFA;	
+}
+
+.container {
+	
+	width: 100%;
+	height: 350px;
+	
+	max-width: 350px;
+	
+	display: flex;
+	flex-direction: column;
+	
+	text-align: center;
+}
+
+.signin__form {
+	
+	width: 100%;
+	
+	display: flex;
+	flex-direction: column;
+}
+
+.title {
+	color: #0288D1;
+	font-weight: 700;
+}
+
+.input {
+	
+	width: 100%;
+	height: 3rem;
+	
+	border: 1px solid #EEEEEE;
+	
+	padding-left: 0.2rem;
+	
+	margin: 0.5rem 0;
+	
+	border-radius: 5px
+	
+}
+
+.login__button {
+	
+	width: 100%;
+	height: 2.5rem;
+	
+	outline: none;
+	
+	border: 1px solid #EEEEEE;
+	border-radius: 25px;
+	
+	font-size: 1rem;
+	
+	background-color: #0288D1;
+	color: white;
+	
+	cursor: pointer;
+	
+}
+
+.login__button:hover {
+	filter: brightness(125%);
+}
+
+.auth__login {
+	margin-top: 3rem;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.google__button {
+	
+	width: 50px;
+	height: 50px;
+	
+	border-radius: 50%;
+	border: 1px solid #EEEEEE;
+	
+	cursor: pointer;
+	
+	background-color: white;
+	
+}
+
+.google {
+	width: 30px;
+	height: 30px;
+}

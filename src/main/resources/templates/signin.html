@@ -4,16 +4,26 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/static/css/signIn.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+        
         <title>Document</title>
     </head>
     <body>
-        <form method="post" class="signin__form">
-            <label>아이디</label>
-            <input name="username" /><br />
-            <label>비밀번호</label>
-            <input type="password" name="password" />
-            <button type="submit">로그인</button>
-            <button type="button" onclick="location.href='/oauth2/authorization/google';">구글 로그인</button>
-        </form>
+    	<div class="container">
+    		<h1 class="title">Notice</h1>
+	        <form method="post" class="signin__form">
+	            
+	            <input class="input" name="username" placeholder="아이디를 입력해주세요"/>
+	            
+	            <input class="input" type="password" name="password" placeholder="패스워드를 입력해주세요"/>
+	            <button class="login__button" type="submit">로그인</button>
+	        </form>
+	        <div class="auth__login">        
+		        <button class="google__button" type="button" onclick="location.href='/oauth2/authorization/google';"><img class="google" src="/static/image/g-logo.png"></button>
+	        </div>
+        </div>
     </body>
 </html>
