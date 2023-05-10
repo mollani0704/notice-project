@@ -1,12 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" defer src="/static/js/index.js"></script>
+        <link rel="stylesheet" href="/static/css/index.css">
         <title>Document</title>
     </head>
     <body>
-        <h1>hello world</h1>
+    	<th:block th:replace="/notice/header"></th:block>
+    	<div class="container">
+    	<h1 class="title">회원 목록</h1>  	
+    	<table class="userList">
+    	<thead>
+    		<tr>
+    			<th>이름</th>
+    			<th>이메일</th>
+    			<th>아이디</th>
+    			<th>ROLE</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr th:each="user : ${userList}">
+    			<td th:text="${user.user_name}"></td>
+    			<td th:text="${user.user_email}"></td>
+    			<td th:text="${user.user_id}"></td>
+    			<td th:text="${user.user_roles}"></td>
+    		</tr>
+    	</tbody>
+    	</table>
+    	</div>
     </body>
 </html>

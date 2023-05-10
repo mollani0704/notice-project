@@ -1,12 +1,14 @@
 package com.notice.project.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -84,4 +86,19 @@ public class UserApiController {
 		return ResponseEntity.ok(new CMRespDto<>(1, "success load", principalDetail.getUser()));
 	}
 	
+	@GetMapping("/api/users")
+	public ResponseEntity<?> getUserList(Model model) {
+		
+		List<User> data = null;
+		
+		try {
+			data = userService.getUserList();
+			model.addAttribute("userList", data);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body(new CMRespDto<>(-1, "Database failed", null));
+		}
+		
+		return ResponseEntity.ok().body(new CMRespDto<>(1, "Database success", data));
+	}
 }

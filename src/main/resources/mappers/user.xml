@@ -58,4 +58,16 @@
   		  
   	</select>
   	
+  	<select id="getUserList" resultType="com.notice.project.user.User">
+  		
+  		select
+  			user_code,
+  			user_name,
+  			user_id,
+  			user_email,
+  			user_roles
+  		from
+  			user_mst
+  	</select>
+  	
   </mapper>

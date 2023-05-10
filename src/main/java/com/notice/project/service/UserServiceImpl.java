@@ -1,5 +1,8 @@
 package com.notice.project.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.notice.project.dto.SignUpReqDto;
@@ -29,6 +32,18 @@ public class UserServiceImpl implements UserService{
 		User user = userRepository.findUserByUsername(username);
 		
 		return user == null;
+	}
+
+	@Override
+	public List<User> getUserList() throws Exception {
+		
+		List<User> users = new ArrayList<User>();
+		
+		userRepository.getUserList().forEach(user -> {
+			users.add(user);
+		});
+		
+		return users;
 	}
 
 }
